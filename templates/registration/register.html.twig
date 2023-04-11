@@ -1,0 +1,99 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+
+<section class="news-letter-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="titie-section wow fadeInDown animated ">
+                    <h1>Register</h1>
+                </div>
+            </div>
+        </div>
+                                        {% for message in app.flashes('message') %}
+                                            <div class="alert alert-success" role="alert">
+                                                {{ message }}
+                                            </div>
+                                        {% endfor %}
+                                        {% for message in app.flashes('warning') %}
+                                            <div class="alert alert-warning" role="alert">
+                                                {{ message }}
+                                            </div>
+                                        {% endfor %}
+                                        {% for message in app.flashes('danger') %}
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ message }}
+                                            </div>
+                                        {% endfor %}
+                                        {% for flashError in app.flashes('verify_email_error') %}
+                                            <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+                                        {% endfor %}
+
+                                        {{ form_start(registrationForm,{'attr':{'novalidate': 'novalidate'}}) }}
+                                        <form  method="post"  class="contact-form">
+                                                <div class="col-lg-8 col-md-8 d-flex justify-content-center">
+                                                    <h4 style="color:white">Sign Up in Seconds!</h4>
+                                                </div>
+                                                <div class="col-lg-8 col-md-8 d-flex justify-content-center">
+                                                    <h4 style="color:white">Signup using your Email address</h4>
+                                                </div>
+                                                <div class="col-lg-6  col-md-8 p-6 m-12">
+                                                    {{ form_errors(registrationForm.nom)}}
+                                                    {{ form_label(registrationForm.nom, 'Name')}}
+                                                    {{ form_widget(registrationForm.nom,{ 'attr': {'class': 'form-contact'}}) }}
+                                                </div>
+                                                <div class="col-lg-6 col-md-8 p-6 m-6">
+                                                    {{ form_errors(registrationForm.prenom)}}
+                                                    {{ form_label(registrationForm.prenom, 'Last Name')}}
+                                                    {{ form_widget(registrationForm.prenom,{ 'attr': {'class': 'form-contact'}}) }}
+                                                </div>
+                                                <div class="col-lg-6 col-md-8 p-1 m-1">
+                                                    {{ form_errors(registrationForm.numtel)}}
+                                                    {{ form_label(registrationForm.numtel, 'Phone N°')}}
+                                                    {{ form_widget(registrationForm.numtel,{ 'attr': {'class': 'form-contact'}}) }}
+                                                </div>
+
+                                                <div class="col-lg-6 col-md-8 p-1 m-1" >
+                                                    {{ form_errors(registrationForm.email)}}
+                                                    {{ form_label(registrationForm.email, 'Email Adress')}}
+                                                    {{ form_widget(registrationForm.email,{ 'attr': {'class': 'form-control'}}) }}
+                                                </div>
+
+                                                <div class="col-lg-6 col-md-8 p-1 m-1">
+                                                    {{ form_errors(registrationForm.password)}}
+                                                    {{ form_widget(registrationForm.password,{ 'attr': {'class': '', 'placeholder' : 'Password', 'id' : ''}}) }}
+                                                </div>
+
+
+
+                                            <div >
+                                                <div class="p-3 m-3">
+                                                    <h4 style="color:white">Your already have an account? <b><a style="color:forestgreen" href="{{ path('app_login') }}" >Login here</a></b></h4>
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="titie-section wow fadeInDown animated ">
+                                                        <h1>-*-</h1>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <input type="submit" class="center-block bottom btn btn-success" value="Sign UP">
+
+                                                </div>
+                                            </div>
+                                        </form>
+                                        {{ form_end(registrationForm) }}
+
+    </div>
+
+
+</section>
+
+{% endblock %}

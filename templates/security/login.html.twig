@@ -1,0 +1,76 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+{% block body %}
+<section class="review-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="titie-section wow fadeInDown animated ">
+                    <h1>Login</h1>
+                </div>
+            </div>
+        </div>
+
+            {% for message in app.flashes('message') %}
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('warning') %}
+                <div class="alert alert-warning" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('danger') %}
+                <div class="alert alert-danger" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for flashError in app.flashes('verify_email_error') %}
+                <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+            {% endfor %}
+                                <form action="{{ path('app_login') }}" method="post"  class="center-block contact-form">
+                                        <h2 class="center-block justify-content-center">You already have an account? Great! Login here.</h2>
+                                        {% if error %}
+                                            <div class="col-lg-6 col-md-8 p-1 m-1 alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                        {% endif %}
+                                        <div  class="center-block input-group">
+
+                                            <input type="email" name="email" id="inputEmail" class="center-block form-control" placeholder="Email address" required autofocus>
+                                        </div>
+                                        <div class="center-block input-group">
+
+                                            <input type="password" name="password" id="inputPassword" class="form-control col-md-6 justify-content-center" placeholder="Password" required>
+                                            <input type="hidden" name="_csrf_token"
+                                                   value="{{ csrf_token('authenticate') }}"
+                                            >
+                                        </div>
+
+                                    <div class="input-group">
+
+                                        <div>
+                                            <input type="submit" class="pull-right contact-submit"value="Sign IN"/>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="input-group">
+
+
+                                    </div>
+                                    <div class="d-flex col-md-6 justify-content-center">
+                                        <div class="p-3 m-3">
+                                            <h4>Don't have an account? <b><a style="color:darkslategrey" href="{{ path('app_register') }}" >Register Now</a></b></h4>
+                                            <h4>Forget password? It's ok.<b><a style="color:darkslategrey" href="{{ path('app_forgotten_password') }}" >Recover here</a></b></h4>
+                                        </div>
+
+                                    </div>
+                                </form>
+
+
+
+    </div>
+</section>
+
+{% endblock %}
