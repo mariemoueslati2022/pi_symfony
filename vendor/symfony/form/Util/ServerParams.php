@@ -41,7 +41,7 @@ class ServerParams
     /**
      * Returns maximum post size in bytes.
      *
-     * @return int|null The maximum post size in bytes
+     * @return int|float|null
      */
     public function getPostMaxSize()
     {
@@ -62,11 +62,11 @@ class ServerParams
 
         switch (substr($iniMax, -1)) {
             case 't': $max *= 1024;
-            // no break
+                // no break
             case 'g': $max *= 1024;
-            // no break
+                // no break
             case 'm': $max *= 1024;
-            // no break
+                // no break
             case 'k': $max *= 1024;
         }
 
@@ -86,7 +86,7 @@ class ServerParams
     /**
      * Returns the content length of the request.
      *
-     * @return mixed The request content length
+     * @return mixed
      */
     public function getContentLength()
     {

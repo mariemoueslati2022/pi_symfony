@@ -15,6 +15,7 @@ class AvisType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            // Rating input with choices ranging from 1 to 5
             ->add('rating', ChoiceType::class, [
                 'choices' => [
                     '1 star' => 1,
@@ -29,6 +30,7 @@ class AvisType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
+            // Comment input with a textarea
             ->add('commentaire', TextareaType::class, [
                 'label' => 'Comment',
                 'required' => true,
@@ -37,6 +39,7 @@ class AvisType extends AbstractType
                     'rows' => 5
                 ]
             ])
+            // Title input with a text field
             ->add('titre', TextType::class, [
                 'label' => 'Title',
                 'required' => true,

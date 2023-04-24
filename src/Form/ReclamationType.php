@@ -19,26 +19,57 @@ class ReclamationType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, [
-                'attr' => ['maxlength' => 255],
+                'attr' => [
+                    'maxlength' => 255,
+                    'required' => true,
+                    'title' => 'Please enter your name',
+                ],
             ])
             ->add('prenom', TextType::class, [
-                'attr' => ['maxlength' => 255],
+                'attr' => [
+                    'maxlength' => 255,
+                    'required' => true,
+                    'title' => 'Please enter your surname',
+                ],
             ])
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, [
+                'attr' => [
+                    'required' => true,
+                    'title' => 'Please enter a valid email address',
+                ],
+            ])
             ->add('tel', IntegerType::class, [
-                'attr' => ['min' => 0, 'max' => 8],
+                'attr' => [
+                    'min' => 0,
+                    'max' => 99999999,
+                    'required' => true,
+                    'title' => 'Please enter a valid telephone number',
+                ],
             ])
             ->add('etat', ChoiceType::class, [
                 'choices' => [
                     'Service' => 'option1',
-                    ' Produit' => 'option2',
+                    'Produit' => 'option2',
                     'Commande' => 'option3',
+                ],
+                'attr' => [
+                    'required' => true,
+                    'title' => 'Please select a category for your complaint',
                 ],
             ])
             ->add('description', TextareaType::class, [
-                'attr' => ['maxlength' => 255],
+                'attr' => [
+                    'maxlength' => 255,
+                    'required' => true,
+                    'title' => 'Please provide a description of your complaint',
+                ],
             ])
-            ->add('dateReclamation', DateType::class)
+            ->add('dateReclamation', DateType::class, [
+                'attr' => [
+                    'required' => true,
+                    'title' => 'Please enter the date of your complaint',
+                ],
+            ])
         ;
     }
 

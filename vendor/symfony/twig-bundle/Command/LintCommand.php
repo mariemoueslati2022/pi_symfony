@@ -22,6 +22,9 @@ use Symfony\Component\Finder\Finder;
  */
 final class LintCommand extends BaseLintCommand
 {
+    protected static $defaultName = 'lint:twig';
+    protected static $defaultDescription = 'Lint a Twig template and outputs encountered errors';
+
     /**
      * {@inheritdoc}
      */
@@ -42,7 +45,7 @@ EOF
         ;
     }
 
-    protected function findFiles($filename): iterable
+    protected function findFiles(string $filename): iterable
     {
         if (str_starts_with($filename, '@')) {
             $dir = $this->getApplication()->getKernel()->locateResource($filename);

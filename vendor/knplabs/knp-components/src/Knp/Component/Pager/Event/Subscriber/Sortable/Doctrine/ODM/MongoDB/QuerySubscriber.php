@@ -10,10 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class QuerySubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var Request
-     */
-    private $request;
+    private Request $request;
 
     public function __construct(Request $request)
     {
@@ -36,10 +33,6 @@ class QuerySubscriber implements EventSubscriberInterface
                 $field = $this->request->query->get($sortField);
                 $dir = null !== $sortDir && strtolower($this->request->query->get($sortDir)) === 'asc' ? 1 : -1;
 
-                if (isset($event->options[PaginatorInterface::SORT_FIELD_WHITELIST])) {
-                    trigger_deprecation('knplabs/knp-components', '2.4.0', \sprintf('%s option is deprecated. Use %s option instead.', PaginatorInterface::SORT_FIELD_WHITELIST, PaginatorInterface::SORT_FIELD_ALLOW_LIST));
-                    $event->options[PaginatorInterface::SORT_FIELD_ALLOW_LIST] = $event->options[PaginatorInterface::SORT_FIELD_WHITELIST];
-                }
                 if (isset($event->options[PaginatorInterface::SORT_FIELD_ALLOW_LIST])) {
                     if (!in_array($field, $event->options[PaginatorInterface::SORT_FIELD_ALLOW_LIST])) {
                         throw new \UnexpectedValueException("Cannot sort by: [{$field}] this field is not in allow list.");
@@ -69,7 +62,7 @@ class QuerySubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            'knp_pager.items' => ['items', 1]
+            'knp_pager.items' => ['items', 1],
         ];
     }
 }

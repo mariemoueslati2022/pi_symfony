@@ -2,242 +2,86 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
-
 
 /**
- * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * User
  *
+ * @ORM\Table(name="user")
+ * @ORM\Entity
  */
-class User implements UserInterface
+class User
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id_user", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
-
+    private $idUser;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\Email(
-     *     message="l adresse  n est pas valide")
-     * @Assert\NotBlank(message="Email is required")
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=255, nullable=false)
      */
-    private $email;
-    /**
-     * @ORM\Column(type="string", length=255, nullable=false)
-     * @Assert\NotBlank(message="Name is required")
-     */
-    private $Nom;
+    private $nom;
 
     /**
-     *  @ORM\Column(type="string", length=255, nullable=false)
-     *  @Assert\NotBlank(message="Last Name is required")
-     * )
+     * @var string
+     *
+     * @ORM\Column(name="prenom", type="string", length=255, nullable=false)
      */
-    private $Prenom;
+    private $prenom;
 
     /**
-     * @ORM\Column(type="string", length=8, nullable=false)
-     * @Assert\NotBlank(message="Num° is required")
-     * @Assert\Length(
-     * min = 8,
-     * minMessage = "Votre Num° doit contenir au moins {{limit }} caracteres")
+     * @var string
+     *
+     * @ORM\Column(name="adresse", type="string", length=255, nullable=false)
      */
-    private $Numtel;
+    private $adresse;
 
-    /**
-     * @ORM\Column(type="json")
-     */
-    private $roles = [];
-
-    /**
-     * @var string The hashed password
-     * @ORM\Column(type="string", nullable=false)
-     * @Assert\NotBlank(message="Password is required")
-     * @Assert\Length(min="8", minMessage="Password must be more then 8 caracteres")
-     */
-    private $password;
-
-
-
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isVerified = false;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $activation_token;
-
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $reset_token;
-
-
-    public function getId(): ?int
+    public function getIdUser(): ?int
     {
-        return $this->id;
+        return $this->idUser;
     }
 
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
     public function getNom(): ?string
     {
-        return $this->Nom;
+        return $this->nom;
     }
 
-    public function setNom(string $Nom): self
+    public function setNom(string $nom): self
     {
-        $this->Nom = $Nom;
+        $this->nom = $nom;
 
         return $this;
     }
-
 
     public function getPrenom(): ?string
     {
-        return $this->Prenom;
+        return $this->prenom;
     }
 
-    public function setPrenom($Prenom): self
+    public function setPrenom(string $prenom): self
     {
-        $this->Prenom = $Prenom;
-        return $this;
-    }
-
-
-
-    public function getNumtel(): ?string
-    {
-        return $this->Numtel;
-    }
-
-    public function setNumtel(string $Numtel): self
-    {
-        $this->Numtel = $Numtel;
+        $this->prenom = $prenom;
 
         return $this;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUsername(): string
+    public function getAdresse(): ?string
     {
-        return (string) $this->email;
+        return $this->adresse;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getRoles(): array
+    public function setAdresse(string $adresse): self
     {
-        $roles = $this->roles;
-        $roles[] = "ROLE_USER";
-        return array_unique($roles);
-    }
-
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
+        $this->adresse = $adresse;
 
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getPassword(): string
-    {
-        return (string) $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-
-    /**
-     * Returning a salt is only needed, if you are not using a modern
-     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
-     *
-     * @see UserInterface
-     */
-    public function getSalt(): ?string
-    {
-        return null;
-    }
-
-    /**
-     * @see UserInterface
-     */
-    public function eraseCredentials()
-    {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
-    }
-
-
-    public function isVerified(): bool
-    {
-        return $this->isVerified;
-    }
-
-    public function setIsVerified(bool $isVerified): self
-    {
-        $this->isVerified = $isVerified;
-
-        return $this;
-    }
-
-    public function getActivationToken(): ?string
-    {
-        return $this->activation_token;
-    }
-
-    public function setActivationToken(?string $activation_token): self
-    {
-        $this->activation_token = $activation_token;
-
-        return $this;
-    }
-
-    public function getResetToken(): ?string
-    {
-        return $this->reset_token;
-    }
-
-    public function setResetToken(?string $reset_token): self
-    {
-        $this->reset_token = $reset_token;
-
-        return $this;
-    }
 
 }

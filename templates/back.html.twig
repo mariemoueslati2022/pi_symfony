@@ -17,7 +17,9 @@
     <link rel="stylesheet" href="{{ asset ('back/css/style.css') }}">
     <!-- endinject -->
     <link rel="shortcut icon" href="{{ asset ('back/images/favicon.png') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
     {%  endblock %}
+    
 </head>
 {% endblock head %}
 <body>
@@ -36,7 +38,21 @@
                     <div class="badge badge-info badge-pill">2</div>
                 </a>
             </li>
-
+  <li>
+  <span class="menu-title">
+          
+          <li>
+            <a href="/reclamation">
+              <i class="bi bi-circle"></i><span>Reclamation</span>
+            </a>
+          </li>
+          <li>
+            <a href="/avis">
+              <i class="bi bi-circle"></i><span>Salle</span>
+            </a>
+          </li>
+           
+        </ul>
                 <div class="collapse" id="ui-basic">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
@@ -86,7 +102,7 @@
 
                 <ul class="navbar-nav navbar-nav-right">
                     <li class="nav-item">
-                        <h4 class="mb-0 font-weight-bold d-none d-xl-block">Admin</h4>
+                        <h4 class="mb-0 font-weight-bold d-none d-xl-block">  Admin</h4>
                     </li>
                     <li class="nav-item dropdown mr-1">
                         <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">

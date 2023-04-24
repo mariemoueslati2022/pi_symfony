@@ -50,14 +50,14 @@ abstract class AbstractExtension implements FormExtensionInterface
     /**
      * {@inheritdoc}
      */
-    public function getType($name)
+    public function getType(string $name)
     {
         if (null === $this->types) {
             $this->initTypes();
         }
 
         if (!isset($this->types[$name])) {
-            throw new InvalidArgumentException(sprintf('The type "%s" can not be loaded by this extension.', $name));
+            throw new InvalidArgumentException(sprintf('The type "%s" cannot be loaded by this extension.', $name));
         }
 
         return $this->types[$name];
@@ -66,7 +66,7 @@ abstract class AbstractExtension implements FormExtensionInterface
     /**
      * {@inheritdoc}
      */
-    public function hasType($name)
+    public function hasType(string $name)
     {
         if (null === $this->types) {
             $this->initTypes();
@@ -78,7 +78,7 @@ abstract class AbstractExtension implements FormExtensionInterface
     /**
      * {@inheritdoc}
      */
-    public function getTypeExtensions($name)
+    public function getTypeExtensions(string $name)
     {
         if (null === $this->typeExtensions) {
             $this->initTypeExtensions();
@@ -91,7 +91,7 @@ abstract class AbstractExtension implements FormExtensionInterface
     /**
      * {@inheritdoc}
      */
-    public function hasTypeExtensions($name)
+    public function hasTypeExtensions(string $name)
     {
         if (null === $this->typeExtensions) {
             $this->initTypeExtensions();
@@ -115,7 +115,7 @@ abstract class AbstractExtension implements FormExtensionInterface
     /**
      * Registers the types.
      *
-     * @return FormTypeInterface[] An array of FormTypeInterface instances
+     * @return FormTypeInterface[]
      */
     protected function loadTypes()
     {
@@ -125,7 +125,7 @@ abstract class AbstractExtension implements FormExtensionInterface
     /**
      * Registers the type extensions.
      *
-     * @return FormTypeExtensionInterface[] An array of FormTypeExtensionInterface instances
+     * @return FormTypeExtensionInterface[]
      */
     protected function loadTypeExtensions()
     {
@@ -175,19 +175,7 @@ abstract class AbstractExtension implements FormExtensionInterface
                 throw new UnexpectedTypeException($extension, FormTypeExtensionInterface::class);
             }
 
-            if (method_exists($extension, 'getExtendedTypes')) {
-                $extendedTypes = [];
-
-                foreach ($extension::getExtendedTypes() as $extendedType) {
-                    $extendedTypes[] = $extendedType;
-                }
-            } else {
-                @trigger_error(sprintf('Not implementing the "%s::getExtendedTypes()" method in "%s" is deprecated since Symfony 4.2.', FormTypeExtensionInterface::class, \get_class($extension)), \E_USER_DEPRECATED);
-
-                $extendedTypes = [$extension->getExtendedType()];
-            }
-
-            foreach ($extendedTypes as $extendedType) {
+            foreach ($extension::getExtendedTypes() as $extendedType) {
                 $this->typeExtensions[$extendedType][] = $extension;
             }
         }

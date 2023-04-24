@@ -9,24 +9,31 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 
 #[Route('/reclamation')]
 class ReclamationController extends AbstractController
 {
     #[Route('/', name: 'app_reclamation_index', methods: ['GET'])]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(EntityManagerInterface $entityManager,PaginatorInterface $paginator,Request $request): Response
     {
         $reclamations = $entityManager
             ->getRepository(Reclamation::class)
             ->findAll();
+            $page = $paginator->paginate(
+                $reclamations,
+                $request->query->getInt('page', 1),
+                3
+            );
 
         return $this->render('reclamation/index.html.twig', [
-            'reclamations' => $reclamations,
+            'page' => $page
         ]);
     }
 
     #[Route('/new', name: 'app_reclamation_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager,FlashyNotifier $flashy): Response
     {
         $reclamation = new Reclamation();
         $form = $this->createForm(ReclamationType::class, $reclamation);
@@ -35,7 +42,7 @@ class ReclamationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($reclamation);
             $entityManager->flush();
-
+            $flashy->success('>Reclamation Ajouter !');
             return $this->redirectToRoute('app_reclamation_index', [], Response::HTTP_SEE_OTHER);
         }
 
