@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Evenement
+{% endblock %}
+
+{% block body %}
+
+	<!-- Nested Row within Card Body -->
+	<div class="row justify-content-md-center">
+
+		<div class="col-lg-6">
+			<div class="card o-hidden border-0 shadow-lg my-5">
+				<div class="card-body p-0">
+					<div class="p-5">
+						<div class="text-center">
+							<h1 class="h4 text-gray-900 mb-4">Modifier un Evenement</h1>
+						</div>
+
+						{{form_start(form,{attr:{'novalidate':'novalidate'}})}}
+					
+							
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-6">
+								{{ form_widget(form.nom,{ 'attr': {'class': "form-control form-control-user",
+                                            'placeholder': 'nom'|trans} }) }}
+							</div>
+							<div class="col-sm-6 mb-3 mb-sm-0">
+
+								{{ form_widget(form.nbreDeplaces,{ 'attr': {'class': "form-control form-control-user",
+                                            'placeholder': 'nombre de places'|trans} }) }}
+							</div>
+						</div>
+                        <div class="form-group row">
+							<div class="col-sm-6">
+								{{ form_widget(form.type,{ 'attr': {'class': "form-control form-control-user",
+                                            'placeholder': 'Type Evement'|trans} }) }}
+							</div>
+							<div class="col-sm-6 mb-3 mb-sm-0">
+
+								{{ form_widget(form.prix,{ 'attr': {'class': "form-control form-control-user",
+                                            'placeholder': 'prix'|trans} }) }}
+							</div>
+						</div>
+                        	<div class="form-group row">
+							<div class="col-sm-6 mb-3 mb-sm-0">
+
+								{{ form_widget(form.date,{ 'attr': {'class': "form-control form-control-user",
+                                            'placeholder': 'Date Evenment'|trans} }) }}
+								<div style="color:red;">
+									{{ form_errors(form.date) }}</div>
+							</div>
+					</div>
+					<hr>
+					<div class="d-grid gap-2 col-6 mx-auto">
+						<button type="submit" class="btn btn-primary btn-user btn-block">
+							Modifier Evenement
+						</button>
+					</div>
+
+					{{form_end(form)}}
+
+					<hr>
+
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+{% endblock %}

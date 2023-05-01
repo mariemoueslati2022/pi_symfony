@@ -1,0 +1,178 @@
+{% extends 'base.html.twig' %}
+{% block title %}offre{% endblock %}
+{% block StyleAfterTemplate %}
+<link href="{{asset('https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css')}}" rel="stylesheet" />
+<link rel="stylesheet" href="{{asset('https://fonts.googleapis.com/icon?family=Material+Icons')}}">
+<style>
+    /* Table actions icons*/
+    table.table td a.view {
+        color: #03A9F4;
+    }
+
+    table.table td a.edit {
+        color: #FFC107;
+    }
+
+    table.table td a.delete {
+        color: #E34724;
+        text-align: center;
+    }
+
+    .hint-text {
+        float: left;
+        margin-top: 6px;
+        font-size: 95%;
+    }
+</style>
+    <link rel="stylesheet" href="{{ asset('https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.css') }}">
+
+
+{% endblock StyleAfterTemplate %}
+{% block stylesheets %}
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}
+
+{% block body %}
+<div class="row justify-content-md-center">
+
+    <div class="col-lg-11">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <div class="p-5">
+                    <div class="text-center">
+                        <h1 class="h4 text-gray-900 mb-4">Les Offres</h1>
+
+                    </div>
+                    <a href="{{ path('Ajouteroffre') }}" class="btn btn-success btn float-right col-sm col-md-3">
+                        <span class="icon text-white-50">
+                            <i style="float: left;" class="material-icons mr-2">&#xE147;</i>
+                        </span>
+                        <span class="text">Ajouter un Offre</span>
+                    </a>
+                    <div class="table-responsive-sm mt-4">
+                        <div class="d-none d-sm-inline-block form-inline navbar-search">
+
+                        </div>
+                        <br>
+                        <br>
+                        <form method="get" action="{{ path('listOffre') }}">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="q" value="{{ query }}">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </form>
+
+                        <table class="table table-hover " id="myTable">
+                            <thead class="thead-light ">
+                                <tr>
+                                    <th scope="col"><a href="?sort=nom&dir={{ dir == 'asc' ? 'desc' : 'asc' }}">Nom</a></th>
+                                    <th scope="col"><a href="?sort=dateDatedeb&dir={{ dir == 'asc' ? 'desc' : 'asc' }}">Date Debut</a></th>
+                                    <th scope="col"><a href="?sort=dateFin&dir={{ dir == 'asc' ? 'desc' : 'asc' }}">Date Fin</a></th>
+                                    <th scope="col"><a href="?sort=pourcentage&dir={{ dir == 'asc' ? 'desc' : 'asc' }}">Pourcentage</a></th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="myTable">
+                                {% for offre in offress %}
+
+                                <tr>
+                                    <td>{{ offre.nom }}</td>
+                                    <td>{{ offre.dateDatedeb |date('d-m-Y') }}</td>
+                                    <td>{{ offre.dateFin |date('d-m-Y') }}</td>
+                                    <td>{{ offre.pourcentage }}</td>
+                                  
+                                    <td>
+                                        <a href="{{ path('updateO', {'id':offre.idOffre }) }}" class="edit" title="Edit"
+                                            data-toggle="tooltip">
+                                            <i class="material-icons">&#xE254;</i>
+                                        </a>
+                                        <a href="" class="delete" data-toggle="modal"
+                                            data-target="#deleteModal-{{ offre.idOffre }}">
+                                            <i class="material-icons">&#xE872;</i>
+                                        </a>
+                                        <div class="modal fade" id="deleteModal-{{ offre.idOffre }}" tabindex="-1"
+                                            role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="deleteModalLabel">Voulez vous
+                                                            supprimer ce offre?</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Annuler</button>
+                                                        <form
+                                                            action="{{ path('SupprimerOffre', {'id':offre.idOffre }) }}"
+                                                            method="POST">
+                                                            <input class="btn btn-danger" type="submit"
+                                                                value="Supprimer">
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                {% endfor %}
+                            </tbody>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+                <div class="card-body p-0">
+                    <div id="calendar-holder"></div>
+                </div>
+        </div>
+    </div>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            var calendarEl = document.getElementById('calendar-holder');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                defaultView: 'dayGridMonth',
+                editable: true,
+                eventSources: [
+                    {
+                        url: "/calendar/loadEvents", // Updated URL path
+                        method: "POST",
+                        extraParams: {
+                            filters: JSON.stringify({})
+                        },
+                        failure: () => {
+                            //
+                            //
+                            alert("There was an error while fetching FullCalendar!");
+                        },
+                    },
+                ],
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay',
+                },
+                plugins: ['interaction', 'dayGrid', 'timeGrid'], // https://fullcalendar.io/docs/plugin-index
+                timeZone: 'UTC',
+            });
+            calendar.render();
+            console.log(calendar);
+        });
+
+    </script>
+    {% endblock %}
