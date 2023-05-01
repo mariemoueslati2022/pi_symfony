@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Commande
  *
- * @ORM\Table(name="commande")
+ * @ORM\Table(name="commande", indexes={@ORM\Index(name="id_user", columns={"id_user"})})
  * @ORM\Entity
  */
 class Commande
@@ -20,13 +20,6 @@ class Commande
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idCommande;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_user", type="integer", nullable=false)
-     */
-    private $idUser;
 
     /**
      * @var string
@@ -49,21 +42,19 @@ class Commande
      */
     private $etat;
 
+    /**
+     * @var \User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_user", referencedColumnName="id_user")
+     * })
+     */
+    private $idUser;
+
     public function getIdCommande(): ?int
     {
         return $this->idCommande;
-    }
-
-    public function getIdUser(): ?int
-    {
-        return $this->idUser;
-    }
-
-    public function setIdUser(int $idUser): self
-    {
-        $this->idUser = $idUser;
-
-        return $this;
     }
 
     public function getType(): ?string
@@ -98,6 +89,18 @@ class Commande
     public function setEtat(string $etat): self
     {
         $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getIdUser(): ?User
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(?User $idUser): self
+    {
+        $this->idUser = $idUser;
 
         return $this;
     }

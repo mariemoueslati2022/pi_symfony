@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Panier
  *
- * @ORM\Table(name="panier")
+ * @ORM\Table(name="panier", indexes={@ORM\Index(name="id_produit", columns={"id_produit"})})
  * @ORM\Entity
  */
 class Panier
@@ -24,32 +24,23 @@ class Panier
     /**
      * @var int
      *
-     * @ORM\Column(name="id_produit", type="integer", nullable=false)
-     */
-    private $idProduit;
-
-    /**
-     * @var int
-     *
      * @ORM\Column(name="quantite", type="integer", nullable=false)
      */
     private $quantite;
 
+    /**
+     * @var \Produit
+     *
+     * @ORM\ManyToOne(targetEntity="Produit")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_produit", referencedColumnName="id_produit")
+     * })
+     */
+    private $idProduit;
+
     public function getIdPanier(): ?int
     {
         return $this->idPanier;
-    }
-
-    public function getIdProduit(): ?int
-    {
-        return $this->idProduit;
-    }
-
-    public function setIdProduit(int $idProduit): self
-    {
-        $this->idProduit = $idProduit;
-
-        return $this;
     }
 
     public function getQuantite(): ?int
@@ -60,6 +51,18 @@ class Panier
     public function setQuantite(int $quantite): self
     {
         $this->quantite = $quantite;
+
+        return $this;
+    }
+
+    public function getIdProduit(): ?Produit
+    {
+        return $this->idProduit;
+    }
+
+    public function setIdProduit(?Produit $idProduit): self
+    {
+        $this->idProduit = $idProduit;
 
         return $this;
     }

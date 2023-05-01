@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,64 +15,36 @@ class User
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Column(name="id_user", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    private $idUser;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=20, nullable=false)
+     * @ORM\Column(name="nom", type="string", length=255, nullable=false)
      */
     private $nom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=20, nullable=false)
+     * @ORM\Column(name="prenom", type="string", length=255, nullable=false)
      */
     private $prenom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=40, nullable=false)
+     * @ORM\Column(name="adresse", type="string", length=255, nullable=false)
      */
-    private $email;
+    private $adresse;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=100, nullable=false)
-     */
-    private $password;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="creation_date", type="date", nullable=false)
-     */
-    private $creationDate;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="image_profile", type="string", length=100, nullable=false)
-     */
-    private $imageProfile;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="role", type="string", length=20, nullable=false)
-     */
-    private $role;
-
-    public function getId(): ?int
+    public function getIdUser(): ?int
     {
-        return $this->id;
+        return $this->idUser;
     }
 
     public function getNom(): ?string
@@ -100,62 +71,14 @@ class User
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getAdresse(): ?string
     {
-        return $this->email;
+        return $this->adresse;
     }
 
-    public function setEmail(string $email): self
+    public function setAdresse(string $adresse): self
     {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    public function getCreationDate(): ?\DateTimeInterface
-    {
-        return $this->creationDate;
-    }
-
-    public function setCreationDate(\DateTimeInterface $creationDate): self
-    {
-        $this->creationDate = $creationDate;
-
-        return $this;
-    }
-
-    public function getImageProfile(): ?string
-    {
-        return $this->imageProfile;
-    }
-
-    public function setImageProfile(string $imageProfile): self
-    {
-        $this->imageProfile = $imageProfile;
-
-        return $this;
-    }
-
-    public function getRole(): ?string
-    {
-        return $this->role;
-    }
-
-    public function setRole(string $role): self
-    {
-        $this->role = $role;
+        $this->adresse = $adresse;
 
         return $this;
     }
