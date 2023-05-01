@@ -94,12 +94,12 @@ class ResolvedFormType implements ResolvedFormTypeInterface
     /**
      * {@inheritdoc}
      */
-    public function createBuilder(FormFactoryInterface $factory, $name, array $options = [])
+    public function createBuilder(FormFactoryInterface $factory, string $name, array $options = [])
     {
         try {
             $options = $this->getOptionsResolver()->resolve($options);
         } catch (ExceptionInterface $e) {
-            throw new $e(sprintf('An error has occurred resolving the options of the form "%s": ', \get_class($this->getInnerType())).$e->getMessage(), $e->getCode(), $e);
+            throw new $e(sprintf('An error has occurred resolving the options of the form "%s": ', get_debug_type($this->getInnerType())).$e->getMessage(), $e->getCode(), $e);
         }
 
         // Should be decoupled from the specific option at some point
@@ -195,12 +195,9 @@ class ResolvedFormType implements ResolvedFormTypeInterface
      *
      * Override this method if you want to customize the builder class.
      *
-     * @param string      $name      The name of the builder
-     * @param string|null $dataClass The data class
-     *
-     * @return FormBuilderInterface The new builder instance
+     * @return FormBuilderInterface
      */
-    protected function newBuilder($name, $dataClass, FormFactoryInterface $factory, array $options)
+    protected function newBuilder(string $name, ?string $dataClass, FormFactoryInterface $factory, array $options)
     {
         if ($this->innerType instanceof ButtonTypeInterface) {
             return new ButtonBuilder($name, $options);
@@ -218,7 +215,7 @@ class ResolvedFormType implements ResolvedFormTypeInterface
      *
      * Override this method if you want to customize the view class.
      *
-     * @return FormView A new view instance
+     * @return FormView
      */
     protected function newView(FormView $parent = null)
     {

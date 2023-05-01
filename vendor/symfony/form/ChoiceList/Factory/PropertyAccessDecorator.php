@@ -50,7 +50,7 @@ class PropertyAccessDecorator implements ChoiceListFactoryInterface
     /**
      * Returns the decorated factory.
      *
-     * @return ChoiceListFactoryInterface The decorated factory
+     * @return ChoiceListFactoryInterface
      */
     public function getDecoratedFactory()
     {
@@ -61,11 +61,14 @@ class PropertyAccessDecorator implements ChoiceListFactoryInterface
      * {@inheritdoc}
      *
      * @param mixed $value
+     * @param mixed $filter
      *
      * @return ChoiceListInterface
      */
-    public function createListFromChoices($choices, $value = null)
+    public function createListFromChoices(iterable $choices, $value = null/* , $filter = null */)
     {
+        $filter = \func_num_args() > 2 ? func_get_arg(2) : null;
+
         if (\is_string($value)) {
             $value = new PropertyPath($value);
         }
@@ -81,18 +84,32 @@ class PropertyAccessDecorator implements ChoiceListFactoryInterface
             };
         }
 
-        return $this->decoratedFactory->createListFromChoices($choices, $value);
+        if (\is_string($filter)) {
+            $filter = new PropertyPath($filter);
+        }
+
+        if ($filter instanceof PropertyPath) {
+            $accessor = $this->propertyAccessor;
+            $filter = static function ($choice) use ($accessor, $filter) {
+                return (\is_object($choice) || \is_array($choice)) && $accessor->getValue($choice, $filter);
+            };
+        }
+
+        return $this->decoratedFactory->createListFromChoices($choices, $value, $filter);
     }
 
     /**
      * {@inheritdoc}
      *
      * @param mixed $value
+     * @param mixed $filter
      *
      * @return ChoiceListInterface
      */
-    public function createListFromLoader(ChoiceLoaderInterface $loader, $value = null)
+    public function createListFromLoader(ChoiceLoaderInterface $loader, $value = null/* , $filter = null */)
     {
+        $filter = \func_num_args() > 2 ? func_get_arg(2) : null;
+
         if (\is_string($value)) {
             $value = new PropertyPath($value);
         }
@@ -108,7 +125,18 @@ class PropertyAccessDecorator implements ChoiceListFactoryInterface
             };
         }
 
-        return $this->decoratedFactory->createListFromLoader($loader, $value);
+        if (\is_string($filter)) {
+            $filter = new PropertyPath($filter);
+        }
+
+        if ($filter instanceof PropertyPath) {
+            $accessor = $this->propertyAccessor;
+            $filter = static function ($choice) use ($accessor, $filter) {
+                return (\is_object($choice) || \is_array($choice)) && $accessor->getValue($choice, $filter);
+            };
+        }
+
+        return $this->decoratedFactory->createListFromLoader($loader, $value, $filter);
     }
 
     /**
@@ -119,11 +147,13 @@ class PropertyAccessDecorator implements ChoiceListFactoryInterface
      * @param mixed $index
      * @param mixed $groupBy
      * @param mixed $attr
+     * @param mixed $labelTranslationParameters
      *
      * @return ChoiceListView
      */
-    public function createView(ChoiceListInterface $list, $preferredChoices = null, $label = null, $index = null, $groupBy = null, $attr = null)
+    public function createView(ChoiceListInterface $list, $preferredChoices = null, $label = null, $index = null, $groupBy = null, $attr = null/* , $labelTranslationParameters = [] */)
     {
+        $labelTranslationParameters = \func_num_args() > 6 ? func_get_arg(6) : [];
         $accessor = $this->propertyAccessor;
 
         if (\is_string($label)) {
@@ -186,6 +216,24 @@ class PropertyAccessDecorator implements ChoiceListFactoryInterface
             };
         }
 
-        return $this->decoratedFactory->createView($list, $preferredChoices, $label, $index, $groupBy, $attr);
+        if (\is_string($labelTranslationParameters)) {
+            $labelTranslationParameters = new PropertyPath($labelTranslationParameters);
+        }
+
+        if ($labelTranslationParameters instanceof PropertyPath) {
+            $labelTranslationParameters = static function ($choice) use ($accessor, $labelTranslationParameters) {
+                return $accessor->getValue($choice, $labelTranslationParameters);
+            };
+        }
+
+        return $this->decoratedFactory->createView(
+            $list,
+            $preferredChoices,
+            $label,
+            $index,
+            $groupBy,
+            $attr,
+            $labelTranslationParameters
+        );
     }
 }

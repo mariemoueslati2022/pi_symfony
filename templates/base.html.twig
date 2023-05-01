@@ -1,335 +1,861 @@
-<!DOCTYPE html>
-<html lang="en">
-{% block head %}
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{% block title %} TapToTrip | Spica Admin {% endblock %} </title>
-    <!-- base:css -->
-    {% block css %}
-    <link rel="stylesheet" href="{{ asset ('back/vendors/mdi/css/materialdesignicons.min.css') }}">
-    <link rel="stylesheet" href=" {{ asset ('back/vendors/css/vendor.bundle.base.css') }}">
-    <!-- endinject -->
-    <!-- plugin css for this page -->
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
-    <link rel="stylesheet" href="{{ asset ('back/css/style.css') }}">
-    <!-- endinject -->
-    <link rel="shortcut icon" href="{{ asset ('back/images/favicon.png') }}" />
-    {%  endblock %}
-</head>
-{% endblock head %}
-<body>
-<div class="container-scroller d-flex">
-    <!-- partial:./partials/_sidebar.html -->
-    <nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <ul class="nav">
-            <li class="nav-item sidebar-category">
-                <p>Navigation</p>
-                <span></span>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="index.html">
-                    <i class="mdi mdi-view-quilt menu-icon"></i>
-                    <span class="menu-title">Dashboard</span>
-                    <div class="badge badge-info badge-pill">2</div>
-                </a>
-            </li>
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      
+       <title>{% block title %} Mart - HTML5 Resoponsive onepage e-commerce template {% endblock %}</title> 
+      
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+       {% block css %}
+        <link rel="icon" href="{{asset('front-office/images/favicon.png')}}">
 
-                <div class="collapse" id="ui-basic">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li class="nav-item">
+        <link rel="stylesheet" href="{{asset('front-office/css/style.css')}}">
+       {% endblock %}
+       {% block StyleAfterTemplate %}{% endblock StyleAfterTemplate %}
+        <!--[if lt IE 9]>
+            <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script>window.html5 || document.write('<script src="js/vendor/html5shiv.js"><\/script>')</script>
+        <![endif]-->
+    </head>
+    <body>
 
-            </li>
-
-
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-                    <i class="mdi mdi-account menu-icon"></i>
-                    <span class="menu-title">Tables</span>
-                    <i class="menu-arrow"></i>
-                </a>
-                <div class="collapse" id="auth">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Admin </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="pages/samples/login-2.html"> Login 2 </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="pages/samples/register-2.html"> Register 2 </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="pages/samples/lock-screen.html"> Lockscreen </a></li>
-                    </ul>
-                </div>
-            </li>
-
-        </ul>
-        <div class="header__menu__right">
-            {% if app.user %}
-                <a href="{{ path('app_logout') }}" class="btn btn-danger justify-content-center">Logout</a>
-            {% endif %}
+        <!-- PRELOADER -->
+        <div id="preloader">
+            <div class="preloader-area">
+            	<div class="preloader-box">
+            		<div class="preloader"></div>
+            	</div>
+            </div>
         </div>
-    </nav>
-    <!-- partial -->
-    <div class="container-fluid page-body-wrapper">
-        <!-- partial:./partials/_navbar.html -->
-        <nav class="navbar col-lg-12 col-12 px-0 py-0 py-lg-4 d-flex flex-row">
-            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-                    <span class="mdi mdi-menu"></span>
-                </button>
 
-                <h4 class="font-weight-bold mb-0 d-none d-md-block mt-1">Welcome TapToTrip </h4>
 
-                <ul class="navbar-nav navbar-nav-right">
-                    <li class="nav-item">
-                        <h4 class="mb-0 font-weight-bold d-none d-xl-block">2021-2022</h4>
-                    </li>
-                    <li class="nav-item dropdown mr-1">
-                        <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
-                            <i class="mdi mdi-calendar mx-0"></i>
-                            <span class="count bg-info">2</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
-                            <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <img src="images/faces/face4.jpg" alt="image" class="profile-pic">
-                                </div>
-                                <div class="preview-item-content flex-grow">
-                                    <h6 class="preview-subject ellipsis font-weight-normal">David Grey
-                                    </h6>
-                                    <p class="font-weight-light small-text text-muted mb-0">
-                                        The meeting is cancelled
-                                    </p>
-                                </div>
-                            </a>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <img src="images/faces/face2.jpg" alt="image" class="profile-pic">
-                                </div>
-                                <div class="preview-item-content flex-grow">
-                                    <h6 class="preview-subject ellipsis font-weight-normal">Tim Cook
-                                    </h6>
-                                    <p class="font-weight-light small-text text-muted mb-0">
-                                        New product launch
-                                    </p>
-                                </div>
-                            </a>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <img src="images/faces/face3.jpg" alt="image" class="profile-pic">
-                                </div>
-                                <div class="preview-item-content flex-grow">
-                                    <h6 class="preview-subject ellipsis font-weight-normal"> Johnson
-                                    </h6>
-                                    <p class="font-weight-light small-text text-muted mb-0">
-                                        Upcoming board meeting
-                                    </p>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown mr-2">
-                        <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" id="notificationDropdown" href="#" data-toggle="dropdown">
-                            <i class="mdi mdi-email-open mx-0"></i>
-                            <span class="count bg-danger">1</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-                            <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-success">
-                                        <i class="mdi mdi-information mx-0"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <h6 class="preview-subject font-weight-normal">Application Error</h6>
-                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                        Just now
-                                    </p>
-                                </div>
-                            </a>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-warning">
-                                        <i class="mdi mdi-settings mx-0"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <h6 class="preview-subject font-weight-normal">Settings</h6>
-                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                        Private message
-                                    </p>
-                                </div>
-                            </a>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-info">
-                                        <i class="mdi mdi-account-box mx-0"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <h6 class="preview-subject font-weight-normal">New user registration</h6>
-                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                        2 days ago
-                                    </p>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-                    <span class="mdi mdi-menu"></span>
-                </button>
-            </div>
-            <div class="navbar-menu-wrapper navbar-search-wrapper d-none d-lg-flex align-items-center">
-                <ul class="navbar-nav mr-lg-2">
-                    <li class="nav-item nav-search d-none d-lg-block">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search Here..." aria-label="search" aria-describedby="search">
-                        </div>
-                    </li>
-                </ul>
-
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                    <a class="dropdown-item">
-                        <i class="mdi mdi-settings text-primary"></i>
-                        Settings
-                    </a>
-                    <a class="dropdown-item">
-                        <i class="mdi mdi-logout text-primary"></i>
-                        Logout
-                    </a>
-                </div>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link icon-link">
-                        <i class="mdi mdi-plus-circle-outline"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link icon-link">
-                        <i class="mdi mdi-web"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link icon-link">
-                        <i class="mdi mdi-clock-outline"></i>
-                    </a>
-                </li>
-                </ul>
-            </div>
-        </nav>
-        <!-- partial -->
-        <div class="main-panel">
-            <div class="content-wrapper">
-
+        <section class="header-top-section">
+            <div class="container">
                 <div class="row">
-                    <div class="col-lg-12 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                {% block body %}
-                                    <h4 class="card-title">Financial management review</h4>
-                                    <div class="table-responsive">
-                                        <table class="table table-striped">
-                                            <thead>
-                                            <tr>
-                                                <th>
-                                                    User
-                                                </th>
-                                                <th>
-                                                    First name
-                                                </th>
-                                                <th>
-                                                    Progress
-                                                </th>
-                                                <th>
-                                                    Amount
-                                                </th>
-                                                <th>
-                                                    Deadline
-                                                </th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td class="py-1">
-                                                    <img src="images/faces/face1.jpg" alt="image"/>
-                                                </td>
-                                                <td>
-                                                    Herman Beck
-                                                </td>
-                                                <td>
-                                                    <div class="progress">
-                                                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    $ 77.99
-                                                </td>
-                                                <td>
-                                                    May 15, 2015
-                                                </td>
-                                            </tr>
+                    <div  class="col-md-6">
+                        <div class="header-top-content">
+                            <ul class="nav nav-pills navbar-left">
+                                <li><a href="#"><i class="pe-7s-call"></i><span>123-123456789</span></a></li>
+                                <li><a href="#"><i class="pe-7s-mail"></i><span> info@mart.com</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div  class="col-md-6">
+                        <div class="header-top-menu">
+                            <ul class="nav nav-pills navbar-right">
+                                <li><a href="#">My Account</a></li>
+                                <li><a href="#">Wishlist</a></li>
+                                <li><a href="#">Cart</a></li>
+                                <li><a href="#">Checkout</a></li>
+                                <li><a href="#"><i class="pe-7s-lock"></i>Login/Register</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <header class="header-section">
+            <nav class="navbar navbar-default">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#"><b>M</b>art</a>
+                    </div>
 
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Home</a></li>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">page</a></li>
+                            <li><a href="#">shop</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right cart-menu">
+                        <li><a href="#" class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><span> Cart -$0&nbsp;</span> <span class="shoping-cart">0</span></a></li>
+                    </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container -->
+            </nav>
+        </header>
 
+        <section class="search-section">
+            <div class="container">
+                <div class="row subscribe-from">
+                    <div class="col-md-12">
+                        <form class="form-inline col-md-12 wow fadeInDown animated">
+                            <div class="form-group">
+                                <input type="email" class="form-control subscribe" id="email" placeholder="Search...">
+                                <button class="suscribe-btn" ><i class="pe-7s-search"></i></button>
+                            </div>
+                        </form><!-- end /. form -->
+                    </div>
+                </div><!-- end of/. row -->
+            </div><!-- end of /.container -->
+        </section><!-- end of /.news letter section -->
+     {% block body %}
+        <section class="slider-section">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators slider-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                </ol>
 
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <img src="{{asset('front-office/images/slider.jpg')}}" width="1648" height="600" alt="">
+                        <div class="carousel-caption">
+                            <h2>DRESSES <b>&</b> JEANS</h2>
+                            <h3>FROM OURFAMOUS BRANDS <Span>SALE</Span></h3>
+                            <a href="#">Buy Now</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{{asset('front-office/images/slider.jpg')}}" width="1648" height="600" alt="">
+                        <div class="carousel-caption">
+                            <h2>DRESSES <b>&</b> JEANS</h2>
+                            <h3>FROM OURFAMOUS BRANDS <Span>SALE</Span></h3>
+                            <a href="#">Buy Now</a>
+                        </div>
+                    </div>
+                    <div class="item ">
+                        <img src="{{asset('front-office/images/slider.jpg')}}" width="1648" height="600" alt="">
+                        <div class="carousel-caption">
+                            <h2>DRESSES <b>&</b> JEANS</h2>
+                            <h3>FROM OURFAMOUS BRANDS <Span>SALE</Span></h3>
+                            <a href="#">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Controls -->
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="pe-7s-angle-left glyphicon-chevron-left" aria-hidden="true"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="pe-7s-angle-right glyphicon-chevron-right" aria-hidden="true"></span>
+                </a>
+            </div>
+        </section>
 
-                                            </tbody>
-                                        </table>
+        <section class="service-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 wow fadeInRight animated" data-wow-delay="0.1s">
+                        <div class="service-item">
+                            <i class="pe-7s-settings"></i>
+                            <h3>SETTING</h3>
+                            <p>Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInRight animated" data-wow-delay="0.2s">
+                        <div class="service-item">
+                            <i class="pe-7s-safe"></i>
+                            <h3>MONEY BACK</h3>
+                            <p>Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInRight animated" data-wow-delay="0.3s">
+                        <div class="service-item">
+                            <i class="pe-7s-global"></i>
+                            <h3>WORLDWIDE SHIPPING</h3>
+                            <p>Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInRight animated" data-wow-delay="0.4s">
+                        <div class="service-item">
+                            <i class="pe-7s-headphones"></i>
+                            <h3>Online support</h3>
+                            <p>Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                                    </div>
-                                {% endblock %}
+        <section class="new-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="titie-section wow fadeInDown animated ">
+                            <h1>NEW COLLECTION</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 wow fadeInLeft animated" data-wow-delay="0.2s">
+                        <div class="product-item">
+                            <img src="{{asset('front-office/images/1.png')}}" class="img-responsive" width="255" height="322" alt="">
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Blue Tshirt</h3>
+                                    <span>$26</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInLeft animated" data-wow-delay="0.4s">
+                        <div class="product-item">
+                            <img src="{{asset('front-office/images/2.png')}}" class="img-responsive" width="255" height="322" alt="">
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>WOMAN shirt</h3>
+                                    <span>$31</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInLeft animated" data-wow-delay="0.6s">
+                        <div class="product-item">
+                            <img src="{{asset('front-office/images/3.png')}}" class="img-responsive" width="255" height="322" alt="">
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>YELLOW Tshirt</h3>
+                                    <span>$21</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInLeft animated" data-wow-delay="0.8s">
+                        <div class="product-item">
+                            <img src="{{asset('front-office/images/4.png')}}" class="img-responsive" width="255" height="322" alt="">
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Cool lingerie</h3>
+                                    <span>$56</span>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
             </div>
-            <!-- content-wrapper ends -->
-            <!-- partial:./partials/_footer.html -->
-            <footer class="footer">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
-                            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Distributed By: <a href="https://www.themewagon.com/" target="_blank">ThemeWagon</a></span>
-                            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard templates</a> from Bootstrapdash.com</span>
+        </section>
+
+        <section class="featured-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="titie-section wow fadeInDown animated ">
+                            <h1>FEATURED PRODUCTS</h1>
                         </div>
                     </div>
                 </div>
-            </footer>
-            <!-- partial -->
-        </div>
-        <!-- main-panel ends -->
-    </div>
-    <!-- page-body-wrapper ends -->
-</div>
-<!-- container-scroller -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="filter-menu">
+                            <ul class="button-group sort-button-group">
+                                <li class="button active" data-category="all">All<span>8</span></li>
+                                <li class="button" data-category="cat-1">Dresses and Suits<span>2</span></li>
+                                <li class="button" data-category="cat-2">Accessories<span>2</span></li>
+                                <li class="button" data-category="cat-3">Miscellaneous<span>4</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row featured isotope">
+                    <div class="col-md-3 col-sm-6 col-xs-12 cat-3 featured-items isotope-item">
+                        <div class="product-item">
+                            <img src="{{asset('front-office/images/product1.png')}}" class="img-responsive" width="255" height="322" alt="">
+                            <div class="sell-meta">
+                                <a href="#" class="new-item">New</a>
+                                <a href="#" class="sell-item">Sell</a>
+                            </div>
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Cool lingerie</h3>
+                                    <span>$26</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 cat-2 featured-items isotope-item">
+                        <div class="product-item">
+                            <img src="{{asset('front-office/images/product2.png')}}" class="img-responsive" width="255" height="322" alt="">
+                            <div class="sell-meta">
+                                <a href="#" class="new-item">New</a>
+                            </div>
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Cool lingerie</h3>
+                                    <span>$21</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 cat-1 featured-items isotope-item">
+                        <div class="product-item">
+                            <img src="{{asset('front-office/images/product3.png')}}" class="img-responsive" width="255" height="322" alt="">
+                            <div class="sell-meta">
+                                <a href="#" class="new-item">New</a>
+                                <a href="#" class="sell-item">Sell</a>
+                            </div>
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Cool lingerie</h3>
+                                    <span>$31</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 cat-3 featured-items isotope-item">
+                        <div class="product-item">
+                            <img src="{{asset('front-office/images/product4.png')}}" class="img-responsive" width="255" height="322" alt="">
+                            <div class="sell-meta">
+                                <a href="#" class="sell-item">Sell</a>
+                            </div>
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Cool lingerie</h3>
+                                    <span>$56</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 cat-2 featured-items isotope-item">
+                        <div class="product-item">
+                            <img src="{{asset('front-office/images/product5.png')}}" class="img-responsive" width="255" height="322" alt="">
+                            <div class="sell-meta">
+                                <a href="#" class="sell-item">Sell</a>
+                            </div>
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Cool lingerie</h3>
+                                    <span>$26</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 cat-3 featured-items isotope-item">
+                        <div class="product-item">
+                            <img src="{{asset('front-office/images/product6.png')}}" class="img-responsive" width="255" height="322" alt="">
+                            <div class="sell-meta">
+                                <a href="#" class="new-item">New</a>
+                                <a href="#" class="sell-item">Sell</a>
+                            </div>
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Cool lingerie</h3>
+                                    <span>$36</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 cat-1 featured-items isotope-item">
+                        <div class="product-item">
+                            <img src="{{asset('front-office/images/product7.png')}}" class="img-responsive" width="255" height="322" alt="">
+                            <div class="sell-meta">
+                                <a href="#" class="new-item">New</a>
+                            </div>
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Cool lingerie</h3>
+                                    <span>$56</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 cat-3 featured-items isotope-item">
+                        <div class="product-item">
+                            <img src="{{asset('front-office/images/product8.png')}}" class="img-responsive" width="255" height="322" alt="">
+                            <div class="sell-meta">
+                                <a href="#" class="sell-item">Sell</a>
+                            </div>
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Cool lingerie</h3>
+                                    <span>$66</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<!-- base:js -->
-<script src="{{ asset ('back/vendors/js/vendor.bundle.base.js') }}"></script>
-<!-- endinject -->
-<!-- Plugin js for this page-->
-<script src="{{ asset ('back/vendors/chart.js/Chart.min.js') }}"></script>
-<!-- End plugin js for this page-->
-<!-- inject:js -->
-<script src="{{ asset ('back/js/off-canvas.js') }}"></script>
-<script src="{{ asset ('back/js/hoverable-collapse.js') }}"></script>
-<script src="{{ asset ('back/js/template.js') }}"></script>
-<!-- endinject -->
-<!-- plugin js for this page -->
-<!-- End plugin js for this page -->
-<!-- Custom js for this page-->
-<script src="{{ asset ('back/js/dashboard.js') }}"></script>
-<!-- End custom js for this page-->
-</body>
+        <section class="offer-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 wow fadeInDown animated ">
+                        <h1>END OF SEASON SALE</h1>
+                        <h2>Up to 35% off Women's Denim</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <section class="best-seller-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="titie-section wow fadeInDown animated ">
+                            <h1>BEST SELLERS</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 wow fadeInDown animated" data-wow-delay="0.2s">
+                        <div class="product-item">
+                            <img src="{{asset('front-office/images/1.png')}}" class="img-responsive" width="255" height="322" alt="">
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Blue Tshirt</h3>
+                                    <span>$26</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInDown animated" data-wow-delay="0.4s">
+                        <div class="product-item">
+                            <img src="{{asset('front-office/images/2.png')}}" class="img-responsive" width="255" height="322" alt="">
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>WOMAN shirt</h3>
+                                    <span>$31</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInDown animated" data-wow-delay="0.6s">
+                        <div class="product-item">
+                            <img src="{{asset('front-office/images/3.png')}}" class="img-responsive" width="255" height="322" alt="">
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>YELLOW Tshirt</h3>
+                                    <span>$21</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInDown animated" data-wow-delay="0.8s">
+                        <div class="product-item">
+                            <img src="{{asset('front-office/images/4.png')}}" class="img-responsive" width="255" height="322" alt="">
+                            <div class="product-hover">
+                                <div class="product-meta">
+                                    <a href="#"><i class="pe-7s-like"></i></a>
+                                    <a href="#"><i class="pe-7s-shuffle"></i></a>
+                                    <a href="#"><i class="pe-7s-clock"></i></a>
+                                    <a href="#"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="product-title">
+                                <a href="#">
+                                    <h3>Cool lingerie</h3>
+                                    <span>$56</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="review-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="titie-section wow fadeInDown animated ">
+                            <h1>customer review</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="feedback" class="carousel slide feedback" data-ride="feedback">
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item active">
+                                <img src="{{asset('front-office/images/member1.png')}}" width="320" height="439" alt="">
+                                <div class="carousel-caption">
+                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, </p>
+                                    <h3>- Olivia -</h3>
+                                    <span>Melbour, Aus</span>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img src="{{asset('front-office/images/member2.png')}}" width="320" height="439" alt="">
+                                <div class="carousel-caption">
+                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, </p>
+                                    <h3>- Olivia -</h3>
+                                    <span>Melbour, Aus</span>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img src="{{asset('front-office/images/member3.png')}}" width="320" height="439" alt="">
+                                <div class="carousel-caption">
+                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, </p>
+                                    <h3>- Olivia -</h3>
+                                    <span>Melbour, Aus</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators review-controlar">
+                            <li data-target="#feedback" data-slide-to="0" class="active">
+                                <img src="{{asset('front-office/images/member1.png')}}" width="320" height="439" alt="">
+                            </li>
+                            <li data-target="#feedback" data-slide-to="1">
+                                <img src="{{asset('front-office/images/member2.png')}}" width="320" height="439" alt="">
+                            </li>
+                            <li data-target="#feedback" data-slide-to="2">
+                                <img src="{{asset('front-office/images/member3.png')}}" width="320" height="439" alt="">
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="news-letter-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="titie-section white wow fadeInDown animated ">
+                            <h1>NEWSLETTER</h1>
+                        </div>
+                        <p>Follow a collection of news & promotions</p>
+                    </div>
+                </div>
+                <div class="row subscribe-from">
+                    <form class="form-inline col-md-6 col-md-offset-3 col-xs-10 col-xs-offset-1  wow fadeInDown animated">
+                        <div class="form-group">
+                            <input type="email" class="form-control subscribe" id="email" placeholder="Enter your email">
+                            <button class="suscribe-btn" ><i class="pe-7s-next"></i></button>
+                        </div>
+                    </form><!-- end /. form -->
+                </div><!-- end of/. row -->
+            </div><!-- end of /.container -->
+        </section><!-- end of /.news letter section -->
+
+        <section class="client-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="titie-section wow fadeInDown animated ">
+                            <h1>our partner</h1>
+                        </div>
+                    </div>
+                </div>
+                <div id="client" class="row owl-carousel owl-theme client-area">
+                    <div class="col-md-12 item">
+                        <a href="#">
+                            <img src="{{asset('front-office/images/client_01.jpg')}}" class="img-responsive" width="300" height="200" alt="">
+                        </a>
+                    </div>
+                    <div class="col-md-12 item">
+                        <a href="#">
+                            <img src="{{asset('front-office/images/client_02.jpg')}}" class="img-responsive" width="300" height="200" alt="">
+                        </a>
+                    </div>
+                    <div class="col-md-12 item">
+                        <a href="#">
+                            <img src="{{asset('front-office/images/client_03.jpg')}}" class="img-responsive" width="300" height="200" alt="">
+                        </a>
+                    </div>
+                    <div class="col-md-12 item">
+                        <a href="#">
+                            <img src="{{asset('front-office/images/client_04.jpg')}}" class="img-responsive" width="300" height="200" alt="">
+                        </a>
+                    </div>
+                    <div class="col-md-12 item">
+                        <a href="#">
+                            <img src="{{asset('front-office/images/client_01.jpg')}}" class="img-responsive" width="300" height="200" alt="">
+                        </a>
+                    </div>
+                    <div class="col-md-12 item">
+                        <a href="#">
+                            <img src="{{asset('front-office/images/client_02.jpg')}}" class="img-responsive" width="300" height="200" alt="">
+                        </a>
+                    </div>
+                    <div class="col-md-12 item">
+                        <a href="#">
+                            <img src="{{asset('front-office/images/client_03.jpg')}}" class="img-responsive" width="300" height="200" alt="">
+                        </a>
+                    </div>
+                    <div class="col-md-12 item">
+                        <a href="#">
+                            <img src="{{asset('front-office/images/client_04.jpg')}}" class="img-responsive" width="300" height="200" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="customNavigation works-navigation">
+                    <a class="btn-work works-prev"><i class="pe-7s-angle-left"></i></a>
+                    <a class="btn-work works-next"><i class="pe-7s-angle-right"></i></a>
+                </div><!-- end of /.client navigation -->
+            </div>
+        </section>
+
+        <section class="news-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="titie-section wow fadeInDown animated ">
+                            <h1>Latest News</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col-sm-4 wow fadeInDown animated" data-wow-delay="0.2s">
+                        <div class="blog-item">
+                            <a href="#"><img src="{{asset('front-office/images/blog1.jpg')}}" width="350" height="262" alt=""></a>
+                            <h3>Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean </h3>
+                            <p>Nam nec tellus a odio tincidunt auc. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt</p>
+                            <a href="#">Read More</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 wow fadeInDown animated" data-wow-delay="0.4s">
+                        <div class="blog-item">
+                            <a href="#"><img src="{{asset('front-office/images/blog2.jpg')}}" width="350" height="262" alt=""></a>
+                            <h3>Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean </h3>
+                            <p>Nam nec tellus a odio tincidunt auc. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt</p>
+                            <a href="#">Read More</a>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-4 wow fadeInDown animated" data-wow-delay="0.6s">
+                        <div class="blog-item">
+                            <a href="#"><img src="{{asset('front-office/images/blog3.jpg')}}" width="350" height="262" alt=""></a>
+                            <h3>Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean </h3>
+                            <p>Nam nec tellus a odio tincidunt auc. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt</p>
+                            <a href="#">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="titie-section wow fadeInDown animated ">
+                            <h1>GET IN TOUCH</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 wow fadeInLeft animated">
+                        <div class="left-content">
+                            <h1><span>M</span>art</h1>
+                            <h3>We'd love To Meet You In Person Or Via The Web!</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vel nulla sapien. Class aptent tacitiaptent taciti sociosqu ad lit himenaeos. Suspendisse massa urna, luctus ut vestibulum necs et, vulputate quis urna. Donec at commodo erat.</p>
+                            <div class="contact-info">
+                                <p><b>Main Office:</b> 123 Elm St. New York City, NY</p>
+                                <p><b>Phone:</b> 1.555.555.5555</p>
+                                <p><b>Email:</b> info@yourdomain.com</p>
+                            </div>
+                            <div class="social-media">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 wow fadeInRight animated">
+                        <form action="" method="" class="contact-form">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="name" placeholder="Your Name">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="name" placeholder="Your Email">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="name" placeholder="Subject">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="name" placeholder="Website URL">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <textarea name="" id="" class="form-control" cols="30" rows="5" placeholder="Your Message..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <input type="submit" class="contact-submit" value="Send" />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endblock %}
+    {% block footer %}
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="center">Designed By <i class="fa fa-love"></i><a href="#">Pi Esprit</a></p>
+                        
+                    </div>
+                </div>
+            </div>
+        </footer>
+{% endblock %}
+        <!-- JQUERY -->
+        {% block js%}
+        <script src="{{asset('front-office/js/vendor/jquery-1.11.2.min.js')}}"></script>
+        <script src="{{asset('front-office/js/vendor/bootstrap.min.js')}}"></script>
+        <script src="{{asset('front-office/js/isotope.pkgd.min.js')}}"></script>
+        <script src="{{asset('front-office/js/owl.carousel.min.js')}}"></script>
+        <script src="{{asset('front-office/js/wow.min.js')}}"></script>
+        <script src="{{asset('front-office/js/custom.js')}}"></script>
+        {% endblock %}
+        {% block JsAfterTemplate %}
+
+        {% endblock JsAfterTemplate %}
+    </body>
 </html>
