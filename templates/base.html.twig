@@ -1,335 +1,124 @@
 <!DOCTYPE html>
-<html lang="en">
-{% block head %}
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{% block title %} TapToTrip | Spica Admin {% endblock %} </title>
-    <!-- base:css -->
-    {% block css %}
-    <link rel="stylesheet" href="{{ asset ('back/vendors/mdi/css/materialdesignicons.min.css') }}">
-    <link rel="stylesheet" href=" {{ asset ('back/vendors/css/vendor.bundle.base.css') }}">
-    <!-- endinject -->
-    <!-- plugin css for this page -->
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
-    <link rel="stylesheet" href="{{ asset ('back/css/style.css') }}">
-    <!-- endinject -->
-    <link rel="shortcut icon" href="{{ asset ('back/images/favicon.png') }}" />
-    {%  endblock %}
-</head>
-{% endblock head %}
-<body>
-<div class="container-scroller d-flex">
-    <!-- partial:./partials/_sidebar.html -->
-    <nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <ul class="nav">
-            <li class="nav-item sidebar-category">
-                <p>Navigation</p>
-                <span></span>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="index.html">
-                    <i class="mdi mdi-view-quilt menu-icon"></i>
-                    <span class="menu-title">Dashboard</span>
-                    <div class="badge badge-info badge-pill">2</div>
-                </a>
-            </li>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css')}}">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')}}">
+        <!-- Tempusdominus Bootstrap 4 -->
+        <link rel="stylesheet" href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
+        <!-- iCheck -->
+        <link rel="stylesheet" href="{{asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
+        <!-- JQVMap -->
+        <link rel="stylesheet" href="{{asset('plugins/jqvmap/jqvmap.min.css')}}">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
+        <!-- overlayScrollbars -->
+        <link rel="stylesheet" href="{{asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
+        <!-- Daterange picker -->
+        <link rel="stylesheet" href="{{asset('plugins/daterangepicker/daterangepicker.css')}}">
+        <!-- summernote -->
+        <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.min.css')}}">    
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+        <!-- Font Awesome -->
+        <link href="{{ asset('plugins/fontawesome-free/css/all.min.css ')}}">
+        <!-- DataTables -->
+        <link href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css ')}}">
+        <link href=" {{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css ')}}">
+        <link href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css ')}}">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
-                <div class="collapse" id="ui-basic">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li class="nav-item">
+        <link href=" {{ asset('dist/css/adminlte.min.css ')}}">    
+        {% endblock %}
+        {% block javascripts %}
 
-            </li>
+                        <script src="{{ asset('plugins/jquery/jquery.min.js')}}"></script>
+            <!-- jQuery UI 1.11.4 -->
+            <script src="{{asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
+            <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+            <script>
+            $.widget.bridge('uibutton', $.ui.button)
+            </script>
+            <!-- Bootstrap 4 -->
+            <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+            <!-- ChartJS -->
+            <script src="{{ asset('plugins/chart.js/Chart.min.js')}}"></script>
+            <!-- Sparkline -->
+            <script src="{{ asset('plugins/sparklines/sparkline.js')}}"></script>
+            <!-- JQVMap -->
+            <script src="{{ asset('plugins/jqvmap/jquery.vmap.min.js')}}"></script>
+            <script src="{{ asset('plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
+            <!-- jQuery Knob Chart -->
+            <script src="{{ asset('plugins/jquery-knob/jquery.knob.min.js')}}"></script>
+            <!-- daterangepicker -->
+            <script src="{{ asset('plugins/moment/moment.min.js')}}"></script>
+            <script src="{{ asset('plugins/daterangepicker/daterangepicker.js')}}"></script>
+            <!-- Tempusdominus Bootstrap 4 -->
+            <script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
+            <!-- Summernote -->
+            <script src="{{ asset('plugins/summernote/summernote-bs4.min.js')}}"></script>
+            <!-- overlayScrollbars -->
+            <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
+            <!-- AdminLTE App -->
+            <script src="{{ asset('dist/js/adminlte.js')}}"></script>
+            <!-- AdminLTE for demo purposes -->
+            <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+            <script src="{{ asset('dist/js/pages/dashboard.js')}}"></script>
+            <script src="{{ asset('plugins/jquery/jquery.min.js')}}"></script>
+        <!-- Bootstrap 4 -->
+        <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+        <!-- DataTables  & Plugins -->
+        <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+        <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+        <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+        <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+        <script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
+        <script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
+        <script src="{{ asset('plugins/jszip/jszip.min.js')}}"></script>
+        <script src="{{ asset('plugins/pdfmake/pdfmake.min.js')}}"></script>
+        <script src="{{ asset('plugins/pdfmake/vfs_fonts.js')}}"></script>
+        <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
+        <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
+        <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+         
+        {% endblock %}
+    </head>
+    <body class="hold-transition sidebar-mini">
+    <div
+		class="wrapper">
+		<!-- Navbar -->
+		    		{% include "sidebar.html.twig" %}
 
 
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-                    <i class="mdi mdi-account menu-icon"></i>
-                    <span class="menu-title">Tables</span>
-                    <i class="menu-arrow"></i>
-                </a>
-                <div class="collapse" id="auth">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Admin </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="pages/samples/login-2.html"> Login 2 </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="pages/samples/register-2.html"> Register 2 </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="pages/samples/lock-screen.html"> Lockscreen </a></li>
-                    </ul>
-                </div>
-            </li>
+		<!-- Content Wrapper. Contains page content -->
+		<div
+			class="content-wrapper">
 
-        </ul>
-        <div class="header__menu__right">
-            {% if app.user %}
-                <a href="{{ path('app_logout') }}" class="btn btn-danger justify-content-center">Logout</a>
-            {% endif %}
+        {% block body %}{% endblock %}
         </div>
-    </nav>
-    <!-- partial -->
-    <div class="container-fluid page-body-wrapper">
-        <!-- partial:./partials/_navbar.html -->
-        <nav class="navbar col-lg-12 col-12 px-0 py-0 py-lg-4 d-flex flex-row">
-            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-                    <span class="mdi mdi-menu"></span>
-                </button>
+		<!-- /.content-wrapper -->
+		<footer class="main-footer">
+			<div class="float-right d-none d-sm-block">
+				<b>Version</b>
+				3.2.0
+			</div>
+			<strong>Copyright &copy; 2014-2021
+				<a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+			All rights reserved.
+		</footer>
 
-                <h4 class="font-weight-bold mb-0 d-none d-md-block mt-1">Welcome TapToTrip </h4>
-
-                <ul class="navbar-nav navbar-nav-right">
-                    <li class="nav-item">
-                        <h4 class="mb-0 font-weight-bold d-none d-xl-block">2021-2022</h4>
-                    </li>
-                    <li class="nav-item dropdown mr-1">
-                        <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
-                            <i class="mdi mdi-calendar mx-0"></i>
-                            <span class="count bg-info">2</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
-                            <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <img src="images/faces/face4.jpg" alt="image" class="profile-pic">
-                                </div>
-                                <div class="preview-item-content flex-grow">
-                                    <h6 class="preview-subject ellipsis font-weight-normal">David Grey
-                                    </h6>
-                                    <p class="font-weight-light small-text text-muted mb-0">
-                                        The meeting is cancelled
-                                    </p>
-                                </div>
-                            </a>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <img src="images/faces/face2.jpg" alt="image" class="profile-pic">
-                                </div>
-                                <div class="preview-item-content flex-grow">
-                                    <h6 class="preview-subject ellipsis font-weight-normal">Tim Cook
-                                    </h6>
-                                    <p class="font-weight-light small-text text-muted mb-0">
-                                        New product launch
-                                    </p>
-                                </div>
-                            </a>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <img src="images/faces/face3.jpg" alt="image" class="profile-pic">
-                                </div>
-                                <div class="preview-item-content flex-grow">
-                                    <h6 class="preview-subject ellipsis font-weight-normal"> Johnson
-                                    </h6>
-                                    <p class="font-weight-light small-text text-muted mb-0">
-                                        Upcoming board meeting
-                                    </p>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown mr-2">
-                        <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" id="notificationDropdown" href="#" data-toggle="dropdown">
-                            <i class="mdi mdi-email-open mx-0"></i>
-                            <span class="count bg-danger">1</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-                            <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-success">
-                                        <i class="mdi mdi-information mx-0"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <h6 class="preview-subject font-weight-normal">Application Error</h6>
-                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                        Just now
-                                    </p>
-                                </div>
-                            </a>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-warning">
-                                        <i class="mdi mdi-settings mx-0"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <h6 class="preview-subject font-weight-normal">Settings</h6>
-                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                        Private message
-                                    </p>
-                                </div>
-                            </a>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-info">
-                                        <i class="mdi mdi-account-box mx-0"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <h6 class="preview-subject font-weight-normal">New user registration</h6>
-                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                        2 days ago
-                                    </p>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-                    <span class="mdi mdi-menu"></span>
-                </button>
-            </div>
-            <div class="navbar-menu-wrapper navbar-search-wrapper d-none d-lg-flex align-items-center">
-                <ul class="navbar-nav mr-lg-2">
-                    <li class="nav-item nav-search d-none d-lg-block">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search Here..." aria-label="search" aria-describedby="search">
-                        </div>
-                    </li>
-                </ul>
-
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                    <a class="dropdown-item">
-                        <i class="mdi mdi-settings text-primary"></i>
-                        Settings
-                    </a>
-                    <a class="dropdown-item">
-                        <i class="mdi mdi-logout text-primary"></i>
-                        Logout
-                    </a>
-                </div>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link icon-link">
-                        <i class="mdi mdi-plus-circle-outline"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link icon-link">
-                        <i class="mdi mdi-web"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link icon-link">
-                        <i class="mdi mdi-clock-outline"></i>
-                    </a>
-                </li>
-                </ul>
-            </div>
-        </nav>
-        <!-- partial -->
-        <div class="main-panel">
-            <div class="content-wrapper">
-
-                <div class="row">
-                    <div class="col-lg-12 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                {% block body %}
-                                    <h4 class="card-title">Financial management review</h4>
-                                    <div class="table-responsive">
-                                        <table class="table table-striped">
-                                            <thead>
-                                            <tr>
-                                                <th>
-                                                    User
-                                                </th>
-                                                <th>
-                                                    First name
-                                                </th>
-                                                <th>
-                                                    Progress
-                                                </th>
-                                                <th>
-                                                    Amount
-                                                </th>
-                                                <th>
-                                                    Deadline
-                                                </th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td class="py-1">
-                                                    <img src="images/faces/face1.jpg" alt="image"/>
-                                                </td>
-                                                <td>
-                                                    Herman Beck
-                                                </td>
-                                                <td>
-                                                    <div class="progress">
-                                                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    $ 77.99
-                                                </td>
-                                                <td>
-                                                    May 15, 2015
-                                                </td>
-                                            </tr>
-
-
-
-
-
-
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-                                {% endblock %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-            <!-- content-wrapper ends -->
-            <!-- partial:./partials/_footer.html -->
-            <footer class="footer">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
-                            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Distributed By: <a href="https://www.themewagon.com/" target="_blank">ThemeWagon</a></span>
-                            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard templates</a> from Bootstrapdash.com</span>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-            <!-- partial -->
-        </div>
-        <!-- main-panel ends -->
-    </div>
-    <!-- page-body-wrapper ends -->
-</div>
-<!-- container-scroller -->
-
-<!-- base:js -->
-<script src="{{ asset ('back/vendors/js/vendor.bundle.base.js') }}"></script>
-<!-- endinject -->
-<!-- Plugin js for this page-->
-<script src="{{ asset ('back/vendors/chart.js/Chart.min.js') }}"></script>
-<!-- End plugin js for this page-->
-<!-- inject:js -->
-<script src="{{ asset ('back/js/off-canvas.js') }}"></script>
-<script src="{{ asset ('back/js/hoverable-collapse.js') }}"></script>
-<script src="{{ asset ('back/js/template.js') }}"></script>
-<!-- endinject -->
-<!-- plugin js for this page -->
-<!-- End plugin js for this page -->
-<!-- Custom js for this page-->
-<script src="{{ asset ('back/js/dashboard.js') }}"></script>
-<!-- End custom js for this page-->
-</body>
-
+		<!-- Control Sidebar -->
+		<aside
+			class="control-sidebar control-sidebar-dark"><!-- Control sidebar content goes here -->
+		</aside>
+		<!-- /.control-sidebar -->
+	</div>
+    </body>
 </html>

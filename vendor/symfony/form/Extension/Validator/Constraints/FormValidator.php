@@ -24,6 +24,9 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
  */
 class FormValidator extends ConstraintValidator
 {
+    /**
+     * @var \SplObjectStorage<FormInterface, array<int, string|string[]|GroupSequence>>
+     */
     private $resolvedGroups;
 
     /**
@@ -170,7 +173,7 @@ class FormValidator extends ConstraintValidator
             if ($childrenSynchronized) {
                 $clientDataAsString = \is_scalar($form->getViewData())
                     ? (string) $form->getViewData()
-                    : \gettype($form->getViewData());
+                    : get_debug_type($form->getViewData());
 
                 $failure = $form->getTransformationFailure();
 
@@ -193,6 +196,7 @@ class FormValidator extends ConstraintValidator
             $this->context->setConstraint($formConstraint);
             $this->context->buildViolation($config->getOption('extra_fields_message', ''))
                 ->setParameter('{{ extra_fields }}', '"'.implode('", "', array_keys($form->getExtraData())).'"')
+                ->setPlural(\count($form->getExtraData()))
                 ->setInvalidValue($form->getExtraData())
                 ->setCode(Form::NO_SUCH_FIELD_ERROR)
                 ->addViolation();
@@ -202,7 +206,7 @@ class FormValidator extends ConstraintValidator
     /**
      * Returns the validation groups of the given form.
      *
-     * @return string|GroupSequence|array<string|GroupSequence> The validation groups
+     * @return string|GroupSequence|array<string|GroupSequence>
      */
     private function getValidationGroups(FormInterface $form)
     {
@@ -243,7 +247,7 @@ class FormValidator extends ConstraintValidator
      *
      * @param string|GroupSequence|array<string|GroupSequence>|callable $groups The validation groups
      *
-     * @return GroupSequence|array<string|GroupSequence> The validation groups
+     * @return GroupSequence|array<string|GroupSequence>
      */
     private static function resolveValidationGroups($groups, FormInterface $form)
     {

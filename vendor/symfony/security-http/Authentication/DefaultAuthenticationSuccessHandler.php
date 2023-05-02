@@ -32,7 +32,9 @@ class DefaultAuthenticationSuccessHandler implements AuthenticationSuccessHandle
     protected $httpUtils;
     protected $logger;
     protected $options;
+    /** @deprecated since Symfony 5.2, use $firewallName instead */
     protected $providerKey;
+    protected $firewallName;
     protected $defaultOptions = [
         'always_use_default_target_path' => false,
         'default_target_path' => '/',
@@ -62,7 +64,7 @@ class DefaultAuthenticationSuccessHandler implements AuthenticationSuccessHandle
     /**
      * Gets the options.
      *
-     * @return array An array of options
+     * @return array
      */
     public function getOptions()
     {
@@ -78,20 +80,43 @@ class DefaultAuthenticationSuccessHandler implements AuthenticationSuccessHandle
      * Get the provider key.
      *
      * @return string
+     *
+     * @deprecated since Symfony 5.2, use getFirewallName() instead
      */
     public function getProviderKey()
     {
-        return $this->providerKey;
+        if (1 !== \func_num_args() || true !== func_get_arg(0)) {
+            trigger_deprecation('symfony/security-core', '5.2', 'Method "%s()" is deprecated, use "getFirewallName()" instead.', __METHOD__);
+        }
+
+        if ($this->providerKey !== $this->firewallName) {
+            trigger_deprecation('symfony/security-core', '5.2', 'The "%1$s::$providerKey" property is deprecated, use "%1$s::$firewallName" instead.', __CLASS__);
+
+            return $this->providerKey;
+        }
+
+        return $this->firewallName;
     }
 
-    /**
-     * Set the provider key.
-     *
-     * @param string $providerKey
-     */
-    public function setProviderKey($providerKey)
+    public function setProviderKey(string $providerKey)
     {
+        if (2 !== \func_num_args() || true !== func_get_arg(1)) {
+            trigger_deprecation('symfony/security-http', '5.2', 'Method "%s" is deprecated, use "setFirewallName()" instead.', __METHOD__);
+        }
+
         $this->providerKey = $providerKey;
+    }
+
+    public function getFirewallName(): ?string
+    {
+        return $this->getProviderKey(true);
+    }
+
+    public function setFirewallName(string $firewallName): void
+    {
+        $this->setProviderKey($firewallName, true);
+
+        $this->firewallName = $firewallName;
     }
 
     /**
@@ -115,8 +140,9 @@ class DefaultAuthenticationSuccessHandler implements AuthenticationSuccessHandle
             $this->logger->debug(sprintf('Ignoring query parameter "%s": not a valid URL.', $this->options['target_path_parameter']));
         }
 
-        if (null !== $this->providerKey && $targetUrl = $this->getTargetPath($request->getSession(), $this->providerKey)) {
-            $this->removeTargetPath($request->getSession(), $this->providerKey);
+        $firewallName = $this->getFirewallName();
+        if (null !== $firewallName && $targetUrl = $this->getTargetPath($request->getSession(), $firewallName)) {
+            $this->removeTargetPath($request->getSession(), $firewallName);
 
             return $targetUrl;
         }

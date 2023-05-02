@@ -1,0 +1,125 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+	
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1>Ajouter Produit</h1>
+						</div>
+						<div class="col-sm-6">
+							<ol class="breadcrumb float-sm-right">
+								<li class="breadcrumb-item">
+									<a href="#">Admin</a>
+								</li>
+								<li class="breadcrumb-item active">Produit > add</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+				<!-- /.container-fluid -->
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+				<div class="container-fluid">
+					<div
+						class="row">
+						<!-- left column -->
+						<div
+							class="col-md-12">
+							<!-- jquery validation -->
+							<div class="card card-primary">
+								<div class="card-header">
+									<h3 class="card-title">Table Produit</h3>
+								</div>
+								<!-- /.card-header -->
+								<!-- form start -->
+								{{ form_start(form , {"attr":{
+                "onsubmit":"return check()"
+              }})  }}{{ form_row(form._token) }}
+								<div class="card-body">
+									<div class="form-group">
+										<label for="exampleInputEmail1">Name</label>
+										{{form_widget(form.name , {"attr":{ " class " : "form-control" }}) }}
+									</div>
+									<div class="form-group">
+										<label for="exampleInputEmail1">Description</label>
+										{{form_widget(form.description , {"attr":{ " class " : "form-control" }}) }}
+									</div>
+									<div class="form-group">
+										<label for="exampleInputEmail1">Price</label>
+										{{form_widget(form.price , {"attr":{ "type":"number", "class " : "form-control" }}) }}
+									</div>
+
+									<div class="form-group">
+										<label for="exampleInputPassword1">Category</label>
+										{{form_widget(form.category , {"attr":{ "type":"number", "class " : "form-control" }}) }}
+									</div>
+									{# <div class="form-group mb-0">
+									                    <div class="custom-control custom-checkbox">
+									                      <input type="checkbox" name="terms" class="custom-control-input" id="exampleCheck1">
+									                      <label class="custom-control-label" for="exampleCheck1">I agree to the <a href="#">terms of service</a>.</label>
+									                    </div>
+									                  </div> #}
+									<div class="form-group">
+										<label for="exampleInputPassword1">File</label>
+										{{form_widget(form.img , {"attr":{ "class " : "form-control" }}) }}
+									</div>
+
+								</div>
+								<!-- /.card-body -->
+								<div class="card-footer">
+									<button type="submit" class="btn btn-primary">Submit</button>
+								</div>
+								{{ form_end(form) }}
+							</div>
+							<!-- /.card -->
+						</div>
+						<!--/.col (left) -->
+						<!-- right column -->
+						<div class="col-md-6"></div>
+						<!--/.col (right) -->
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.container-fluid -->
+			</section>
+		
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+	<script>
+
+		function check() {
+
+var name = document.getElementById("product_form_name").value;
+var desc = document.getElementById("product_form_description").value;
+var price = document.getElementById("product_form_price").value;
+var file = document.getElementById("product_form_img").value;
+var a = true;
+var nameRegex = /^[a-zA-Z]+$/;
+if (! name.match(nameRegex)) {
+toastr.error("Name must contain only alphabetical characters");
+a = false;
+}
+
+if (isNaN(price) || price ==="") {
+toastr.error("Price must be a valid number");
+a = false;
+}
+var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+
+
+if (! allowedExtensions.exec(file)) {
+toastr.error("Please select an image");
+a = false;
+}
+
+
+return a;
+}
+	</script>
+{% endblock %}
